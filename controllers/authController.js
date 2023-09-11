@@ -83,14 +83,14 @@ export const loginController = async (req, res) => {
         }
 
         // Token
-        const token = await JWT.sign({ _id: user._id }, process.env.JWT_SECRET,{expiresIn:'2d'});
+        const token = await JWT.sign({ _id: user._id }, process.env.JWT_SECRET, { expiresIn: '2d' });
         res.status(200).send({
             success: true,
             message: "login Successfull",
-            user:{
-                name:user.name,
-                email:user.email
-                
+            user: {
+                name: user.name,
+                email: user.email
+
             },
             token,
         });
@@ -102,5 +102,17 @@ export const loginController = async (req, res) => {
             message: "login failed",
             error
         })
+    }
+}
+
+
+// test controller
+
+export const protectedrout = (req, res) => {
+    try {
+        res.send("protected route");
+    } catch (error) {
+        console.log(error);
+        res.send(error)
     }
 }
